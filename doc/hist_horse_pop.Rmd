@@ -4,7 +4,8 @@ bibliography: references.bib
 output:   
   html_document:
     toc: true
-
+params: 
+  province: "Alberta"
 ---
 
 ```{r setup, include=FALSE}
@@ -64,11 +65,11 @@ max_horses <- horse_pop %>%
 knitr::kable(max_horses, caption="Table 1. The range of the number horses for each provinces ")
 ```
 
-Below we zoom in and look at the province of `r max_horses$Province[1]`:
+Below we zoom in and look at the province of `r params$province`:
 
 ```{r plot province, fig.cap = "Figure 2", fig.width=5, fig.height=4}
 province_plot <- horse_pop %>% 
-  filter(GEO == "Alberta") %>% 
+  filter(GEO == params$province) %>% 
   ggplot(aes(x = Ref_Date, y = Value)) +
   geom_point() +
   geom_line() +
